@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Weather Information" icon-name="utility:world">
+        <lightning-layout class="slds-m-around_medium" multiple-rows>
+            
+            <!-- Colțul Stânga: Input și Buton -->
+            <lightning-layout-item padding="around-small" size="6">
+                <lightning-input label="Enter City Name"
+                                 value={cityName}
+                                 onchange={handleCityNameChange}
+                                 class="slds-m-bottom_small"
+                                 style="width: 150px;">
+                </lightning-input>
+                <lightning-button label="Get Weather"
+                                  onclick={getWeather}
+                                  variant="brand"
+                                  class="slds-m-bottom_medium">
+                </lightning-button>
+            </lightning-layout-item>
+
+            <!-- Colțul Dreapta: Informațiile despre Vreme -->
+            <lightning-layout-item padding="around-small" size="6">
+                <template if:true={rawWeatherData}>
+                    <div class="weather-info">
+                        <p>Temperature in {displayedCityName}: {temperature}</p>
+                        <p>Description: {weatherDescription}</p>
+                        <img src={iconUrl} alt="Weather Icon"/>
+                    </div>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+        
+        <!-- Erori -->
+        <template if:true={error}>
+            <div class="slds-m-around_medium">
+                <p>{error}</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>
